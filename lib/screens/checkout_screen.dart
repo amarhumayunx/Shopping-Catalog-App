@@ -36,10 +36,16 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('Checkout'),
+        backgroundColor: Colors.black,
+        elevation: 0,
+        title: const Text(
+          'Checkout',
+          style: TextStyle(color: Colors.white),
+        ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -59,6 +65,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   const SizedBox(height: 24),
                   ElevatedButton(
                     onPressed: () => Navigator.of(context).pop(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF00FF88),
+                      foregroundColor: Colors.black,
+                    ),
                     child: const Text('Go Back to Cart'),
                   ),
                 ],
@@ -74,13 +84,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 // Order Summary Section
                 _buildSectionTitle('Order Summary'),
                 const SizedBox(height: 8),
-                Card(
+                Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1A1A1A),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       children: [
                         ...cartViewModel.cartItems.map((item) => _buildOrderItem(item)),
-                        const Divider(),
+                        const Divider(color: Colors.grey),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -89,6 +103,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
+                                color: Colors.white,
                               ),
                             ),
                             Text(
@@ -96,7 +111,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.green,
+                                color: Color(0xFF00FF88),
                               ),
                             ),
                           ],
@@ -110,17 +125,34 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 // Delivery Information Section
                 _buildSectionTitle('Delivery Information'),
                 const SizedBox(height: 8),
-                Card(
+                Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1A1A1A),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       children: [
                         TextFormField(
                           controller: _nameController,
-                          decoration: const InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
                             labelText: 'Full Name',
-                            prefixIcon: Icon(Icons.person),
-                            border: OutlineInputBorder(),
+                            labelStyle: const TextStyle(color: Colors.grey),
+                            prefixIcon: const Icon(Icons.person, color: Colors.grey),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(color: Colors.grey),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(color: Colors.grey),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(color: Color(0xFF00FF88)),
+                            ),
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -132,10 +164,23 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         const SizedBox(height: 16),
                         TextFormField(
                           controller: _emailController,
-                          decoration: const InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
                             labelText: 'Email',
-                            prefixIcon: Icon(Icons.email),
-                            border: OutlineInputBorder(),
+                            labelStyle: const TextStyle(color: Colors.grey),
+                            prefixIcon: const Icon(Icons.email, color: Colors.grey),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(color: Colors.grey),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(color: Colors.grey),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(color: Color(0xFF00FF88)),
+                            ),
                           ),
                           keyboardType: TextInputType.emailAddress,
                           validator: (value) {
@@ -151,10 +196,23 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         const SizedBox(height: 16),
                         TextFormField(
                           controller: _phoneController,
-                          decoration: const InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
                             labelText: 'Phone Number',
-                            prefixIcon: Icon(Icons.phone),
-                            border: OutlineInputBorder(),
+                            labelStyle: const TextStyle(color: Colors.grey),
+                            prefixIcon: const Icon(Icons.phone, color: Colors.grey),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(color: Colors.grey),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(color: Colors.grey),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(color: Color(0xFF00FF88)),
+                            ),
                           ),
                           keyboardType: TextInputType.phone,
                           validator: (value) {
@@ -167,10 +225,23 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         const SizedBox(height: 16),
                         TextFormField(
                           controller: _addressController,
-                          decoration: const InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
                             labelText: 'Address',
-                            prefixIcon: Icon(Icons.home),
-                            border: OutlineInputBorder(),
+                            labelStyle: const TextStyle(color: Colors.grey),
+                            prefixIcon: const Icon(Icons.home, color: Colors.grey),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(color: Colors.grey),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(color: Colors.grey),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(color: Color(0xFF00FF88)),
+                            ),
                           ),
                           maxLines: 2,
                           validator: (value) {
@@ -186,10 +257,23 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             Expanded(
                               child: TextFormField(
                                 controller: _cityController,
-                                decoration: const InputDecoration(
+                                style: const TextStyle(color: Colors.white),
+                                decoration: InputDecoration(
                                   labelText: 'City',
-                                  prefixIcon: Icon(Icons.location_city),
-                                  border: OutlineInputBorder(),
+                                  labelStyle: const TextStyle(color: Colors.grey),
+                                  prefixIcon: const Icon(Icons.location_city, color: Colors.grey),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: const BorderSide(color: Colors.grey),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: const BorderSide(color: Colors.grey),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: const BorderSide(color: Color(0xFF00FF88)),
+                                  ),
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -203,10 +287,23 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             Expanded(
                               child: TextFormField(
                                 controller: _zipController,
-                                decoration: const InputDecoration(
+                                style: const TextStyle(color: Colors.white),
+                                decoration: InputDecoration(
                                   labelText: 'ZIP Code',
-                                  prefixIcon: Icon(Icons.markunread_mailbox),
-                                  border: OutlineInputBorder(),
+                                  labelStyle: const TextStyle(color: Colors.grey),
+                                  prefixIcon: const Icon(Icons.markunread_mailbox, color: Colors.grey),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: const BorderSide(color: Colors.grey),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: const BorderSide(color: Colors.grey),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: const BorderSide(color: Color(0xFF00FF88)),
+                                  ),
                                 ),
                                 keyboardType: TextInputType.number,
                                 validator: (value) {
@@ -228,15 +325,20 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 // Payment Method Section
                 _buildSectionTitle('Payment Method'),
                 const SizedBox(height: 8),
-                Card(
+                Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1A1A1A),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       children: [
                         RadioListTile<String>(
-                          title: const Text('Credit Card'),
+                          title: const Text('Credit Card', style: TextStyle(color: Colors.white)),
                           value: 'Credit Card',
                           groupValue: _selectedPaymentMethod,
+                          activeColor: const Color(0xFF00FF88),
                           onChanged: (value) {
                             setState(() {
                               _selectedPaymentMethod = value!;
@@ -244,9 +346,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           },
                         ),
                         RadioListTile<String>(
-                          title: const Text('Debit Card'),
+                          title: const Text('Debit Card', style: TextStyle(color: Colors.white)),
                           value: 'Debit Card',
                           groupValue: _selectedPaymentMethod,
+                          activeColor: const Color(0xFF00FF88),
                           onChanged: (value) {
                             setState(() {
                               _selectedPaymentMethod = value!;
@@ -254,9 +357,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           },
                         ),
                         RadioListTile<String>(
-                          title: const Text('Cash on Delivery'),
+                          title: const Text('Cash on Delivery', style: TextStyle(color: Colors.white)),
                           value: 'Cash on Delivery',
                           groupValue: _selectedPaymentMethod,
+                          activeColor: const Color(0xFF00FF88),
                           onChanged: (value) {
                             setState(() {
                               _selectedPaymentMethod = value!;
@@ -264,9 +368,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           },
                         ),
                         RadioListTile<String>(
-                          title: const Text('PayPal'),
+                          title: const Text('PayPal', style: TextStyle(color: Colors.white)),
                           value: 'PayPal',
                           groupValue: _selectedPaymentMethod,
+                          activeColor: const Color(0xFF00FF88),
                           onChanged: (value) {
                             setState(() {
                               _selectedPaymentMethod = value!;
@@ -286,8 +391,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     onPressed: _isProcessing ? null : () => _handleCheckout(context, cartViewModel),
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      backgroundColor: Colors.green,
-                      foregroundColor: Colors.white,
+                      backgroundColor: const Color(0xFF00FF88),
+                      foregroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                     child: _isProcessing
                         ? const SizedBox(
@@ -319,6 +427,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       style: const TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.bold,
+        color: Colors.white,
       ),
     );
   }
@@ -334,14 +443,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               children: [
                 Text(
                   item.product.title,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 4),
                 Text(
                   'Qty: ${item.quantity} × \$${item.product.price.toStringAsFixed(2)}',
-                  style: TextStyle(color: Colors.grey[600]),
+                  style: const TextStyle(color: Colors.grey),
                 ),
               ],
             ),
@@ -351,6 +463,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
+              color: Color(0xFF00FF88),
             ),
           ),
         ],
@@ -382,22 +495,32 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     final shouldPop = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
+        backgroundColor: const Color(0xFF1A1A1A),
         title: const Row(
           children: [
-            Icon(Icons.check_circle, color: Colors.green, size: 32),
+            Icon(Icons.check_circle, color: Color(0xFF00FF88), size: 32),
             SizedBox(width: 8),
-            Text('Order Placed!'),
+            Text('Order Placed!', style: TextStyle(color: Colors.white)),
           ],
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Your order has been placed successfully.'),
+            const Text(
+              'Your order has been placed successfully.',
+              style: TextStyle(color: Colors.white),
+            ),
             const SizedBox(height: 16),
-            Text('Order Total: \$${cartViewModel.totalPrice.toStringAsFixed(2)}'),
+            Text(
+              'Order Total: \$${cartViewModel.totalPrice.toStringAsFixed(2)}',
+              style: const TextStyle(color: Color(0xFF00FF88), fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
-            Text('Payment Method: $_selectedPaymentMethod'),
+            Text(
+              'Payment Method: $_selectedPaymentMethod',
+              style: const TextStyle(color: Colors.grey),
+            ),
             const SizedBox(height: 16),
             const Text(
               'You will receive a confirmation email shortly.',
@@ -410,7 +533,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             onPressed: () {
               Navigator.pop(context, true);
             },
-            child: const Text('OK'),
+            child: const Text('OK', style: TextStyle(color: Color(0xFF00FF88))),
           ),
         ],
       ),
@@ -427,7 +550,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Order placed successfully!'),
-            backgroundColor: Colors.green,
+            backgroundColor: Color(0xFF1A1A1A),
           ),
         );
       }

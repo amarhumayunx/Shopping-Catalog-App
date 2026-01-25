@@ -13,15 +13,21 @@ class FavoritesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('Favorites'),
+        backgroundColor: Colors.black,
+        elevation: 0,
+        title: const Text(
+          'Favorites',
+          style: TextStyle(color: Colors.white),
+        ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.shopping_cart),
+            icon: const Icon(Icons.shopping_cart_outlined, color: Colors.white),
             onPressed: () {
               Navigator.push(
                 context,
@@ -36,7 +42,11 @@ class FavoritesScreen extends StatelessWidget {
       body: Consumer<FavoritesViewModel>(
         builder: (context, viewModel, child) {
           if (viewModel.isLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Color(0xFF00FF88),
+              ),
+            );
           }
 
           if (viewModel.error != null) {
@@ -44,9 +54,17 @@ class FavoritesScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Error: ${viewModel.error}'),
+                  Text(
+                    'Error: ${viewModel.error}',
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () => viewModel.loadFavorites(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF00FF88),
+                      foregroundColor: Colors.black,
+                    ),
                     child: const Text('Retry'),
                   ),
                 ],
@@ -72,14 +90,9 @@ class FavoritesScreen extends StatelessWidget {
 
           return RefreshIndicator(
             onRefresh: () => viewModel.loadFavorites(),
-            child: GridView.builder(
-              padding: const EdgeInsets.all(8),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.7,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
-              ),
+            color: const Color(0xFF00FF88),
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(vertical: 8),
               itemCount: viewModel.favorites.length,
               itemBuilder: (context, index) {
                 final product = viewModel.favorites[index];
@@ -89,16 +102,23 @@ class FavoritesScreen extends StatelessWidget {
                     final confirm = await showDialog<bool>(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: const Text('Remove from Favorites'),
-                        content: const Text('Are you sure you want to remove this product from favorites?'),
+                        backgroundColor: const Color(0xFF1A1A1A),
+                        title: const Text(
+                          'Remove from Favorites',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        content: const Text(
+                          'Are you sure you want to remove this product from favorites?',
+                          style: TextStyle(color: Colors.grey),
+                        ),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context, false),
-                            child: const Text('Cancel'),
+                            child: const Text('Cancel', style: TextStyle(color: Colors.grey)),
                           ),
                           TextButton(
                             onPressed: () => Navigator.pop(context, true),
-                            child: const Text('Remove'),
+                            child: const Text('Remove', style: TextStyle(color: Color(0xFF00FF88))),
                           ),
                         ],
                       ),
@@ -136,8 +156,12 @@ class _FavoriteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1A1A1A),
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: InkWell(
         onTap: () {
           Navigator.push(
@@ -150,62 +174,81 @@ class _FavoriteCard extends StatelessWidget {
             ),
           );
         },
-        child: Stack(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
-                    child: product.bestImageUrl.isNotEmpty
-                        ? SafeNetworkImage(
-                            imageUrl: product.bestImageUrl,
-                            fit: BoxFit.cover,
-                          )
-                        : Container(
-                            color: Colors.grey[300],
-                            child: const Icon(Icons.image_not_supported, size: 48),
-                          ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        product.title,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Product Image
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: product.bestImageUrl.isNotEmpty
+                    ? SafeNetworkImage(
+                        imageUrl: product.bestImageUrl,
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover,
+                      )
+                    : Container(
+                        width: 100,
+                        height: 100,
+                        color: const Color(0xFF2A2A2A),
+                        child: const Icon(
+                          Icons.image_not_supported,
+                          color: Colors.grey,
+                          size: 32,
                         ),
                       ),
-                      const SizedBox(height: 4),
-                      Text(
-                        '\$${product.price.toStringAsFixed(2)}',
-                        style: const TextStyle(
-                          color: Colors.green,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
+              ),
+              const SizedBox(width: 16),
+              // Product Details
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      product.title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.white,
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 8),
+                    // Price
+                    Text(
+                      '\$${product.price.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                        color: Color(0xFF00FF88),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    // Category
+                    Text(
+                      product.category.name,
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            Positioned(
-              top: 8,
-              right: 8,
-              child: IconButton(
-                icon: const Icon(Icons.favorite, color: Colors.red),
+              ),
+              // Favorite Icon
+              IconButton(
+                icon: const Icon(
+                  Icons.favorite,
+                  color: Color(0xFF00FF88),
+                ),
                 onPressed: onRemove,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

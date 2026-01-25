@@ -12,10 +12,16 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('Shopping Cart'),
+        backgroundColor: Colors.black,
+        elevation: 0,
+        title: const Text(
+          'Shopping Cart',
+          style: TextStyle(color: Colors.white),
+        ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
         actions: [
@@ -25,21 +31,25 @@ class CartScreen extends StatelessWidget {
                 return const SizedBox.shrink();
               }
               return IconButton(
-                icon: const Icon(Icons.delete_sweep),
+                icon: const Icon(Icons.delete_sweep, color: Colors.white),
                 onPressed: () async {
                   final confirm = await showDialog<bool>(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: const Text('Clear Cart'),
-                      content: const Text('Are you sure you want to clear all items from cart?'),
+                      backgroundColor: const Color(0xFF1A1A1A),
+                      title: const Text('Clear Cart', style: TextStyle(color: Colors.white)),
+                      content: const Text(
+                        'Are you sure you want to clear all items from cart?',
+                        style: TextStyle(color: Colors.grey),
+                      ),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context, false),
-                          child: const Text('Cancel'),
+                          child: const Text('Cancel', style: TextStyle(color: Colors.grey)),
                         ),
                         TextButton(
                           onPressed: () => Navigator.pop(context, true),
-                          child: const Text('Clear'),
+                          child: const Text('Clear', style: TextStyle(color: Color(0xFF00FF88))),
                         ),
                       ],
                     ),
@@ -64,7 +74,11 @@ class CartScreen extends StatelessWidget {
       body: Consumer<CartViewModel>(
         builder: (context, viewModel, child) {
           if (viewModel.isLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Color(0xFF00FF88),
+              ),
+            );
           }
 
           if (viewModel.error != null) {
@@ -72,9 +86,17 @@ class CartScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Error: ${viewModel.error}'),
+                  Text(
+                    'Error: ${viewModel.error}',
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () => viewModel.loadCart(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF00FF88),
+                      foregroundColor: Colors.black,
+                    ),
                     child: const Text('Retry'),
                   ),
                 ],
@@ -115,16 +137,20 @@ class CartScreen extends StatelessWidget {
                         final confirm = await showDialog<bool>(
                           context: context,
                           builder: (context) => AlertDialog(
-                            title: const Text('Remove Item'),
-                            content: const Text('Are you sure you want to remove this item from cart?'),
+                            backgroundColor: const Color(0xFF1A1A1A),
+                            title: const Text('Remove Item', style: TextStyle(color: Colors.white)),
+                            content: const Text(
+                              'Are you sure you want to remove this item from cart?',
+                              style: TextStyle(color: Colors.grey),
+                            ),
                             actions: [
                               TextButton(
                                 onPressed: () => Navigator.pop(context, false),
-                                child: const Text('Cancel'),
+                                child: const Text('Cancel', style: TextStyle(color: Colors.grey)),
                               ),
                               TextButton(
                                 onPressed: () => Navigator.pop(context, true),
-                                child: const Text('Remove'),
+                                child: const Text('Remove', style: TextStyle(color: Color(0xFF00FF88))),
                               ),
                             ],
                           ),
@@ -148,10 +174,10 @@ class CartScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: const Color(0xFF1A1A1A),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
+                      color: Colors.black.withOpacity(0.5),
                       spreadRadius: 1,
                       blurRadius: 5,
                     ),
@@ -167,6 +193,7 @@ class CartScreen extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
                         Text(
@@ -174,7 +201,7 @@ class CartScreen extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Colors.green,
+                            color: Color(0xFF00FF88),
                           ),
                         ),
                       ],
@@ -192,9 +219,20 @@ class CartScreen extends StatelessWidget {
                           );
                         },
                         style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF00FF88),
+                          foregroundColor: Colors.black,
                           padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
-                        child: const Text('Checkout'),
+                        child: const Text(
+                          'Checkout',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -221,8 +259,12 @@ class _CartItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 4),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1A1A1A),
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: InkWell(
         onTap: () {
           Navigator.push(
@@ -249,8 +291,13 @@ class _CartItemCard extends StatelessWidget {
                         fit: BoxFit.cover,
                       )
                     : Container(
-                        color: Colors.grey[300],
-                        child: const Icon(Icons.image_not_supported),
+                        width: 80,
+                        height: 80,
+                        color: const Color(0xFF2A2A2A),
+                        child: const Icon(
+                          Icons.image_not_supported,
+                          color: Colors.grey,
+                        ),
                       ),
               ),
               const SizedBox(width: 12),
@@ -264,13 +311,14 @@ class _CartItemCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       '\$${item.product.price.toStringAsFixed(2)}',
                       style: const TextStyle(
-                        color: Colors.green,
+                        color: Color(0xFF00FF88),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -278,7 +326,10 @@ class _CartItemCard extends StatelessWidget {
                     Row(
                       children: [
                         IconButton(
-                          icon: const Icon(Icons.remove_circle_outline),
+                          icon: const Icon(
+                            Icons.remove_circle_outline,
+                            color: Colors.white,
+                          ),
                           onPressed: () {
                             if (item.quantity > 1) {
                               onQuantityChanged(item.quantity - 1);
@@ -290,17 +341,24 @@ class _CartItemCard extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
                         IconButton(
-                          icon: const Icon(Icons.add_circle_outline),
+                          icon: const Icon(
+                            Icons.add_circle_outline,
+                            color: Colors.white,
+                          ),
                           onPressed: () {
                             onQuantityChanged(item.quantity + 1);
                           },
                         ),
                         const Spacer(),
                         IconButton(
-                          icon: const Icon(Icons.delete, color: Colors.red),
+                          icon: const Icon(
+                            Icons.delete,
+                            color: Color(0xFF00FF88),
+                          ),
                           onPressed: onRemove,
                         ),
                       ],
