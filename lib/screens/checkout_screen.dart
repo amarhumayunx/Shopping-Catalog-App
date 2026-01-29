@@ -18,7 +18,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   final _addressController = TextEditingController();
   final _cityController = TextEditingController();
   final _zipController = TextEditingController();
-  
+
   String _selectedPaymentMethod = 'Credit Card';
   bool _isProcessing = false;
 
@@ -40,10 +40,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,
-        title: const Text(
-          'Checkout',
-          style: TextStyle(color: Colors.white),
-        ),
+        title: const Text('Checkout', style: TextStyle(color: Colors.white)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
@@ -56,7 +53,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.shopping_cart_outlined, size: 64, color: Colors.grey),
+                  const Icon(
+                    Icons.shopping_cart_outlined,
+                    size: 64,
+                    color: Colors.grey,
+                  ),
                   const SizedBox(height: 16),
                   const Text(
                     'Your cart is empty',
@@ -93,7 +94,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       children: [
-                        ...cartViewModel.cartItems.map((item) => _buildOrderItem(item)),
+                        ...cartViewModel.cartItems.map(
+                          (item) => _buildOrderItem(item),
+                        ),
                         const Divider(color: Colors.grey),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -140,7 +143,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           decoration: InputDecoration(
                             labelText: 'Full Name',
                             labelStyle: const TextStyle(color: Colors.grey),
-                            prefixIcon: const Icon(Icons.person, color: Colors.grey),
+                            prefixIcon: const Icon(
+                              Icons.person,
+                              color: Colors.grey,
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: const BorderSide(color: Colors.grey),
@@ -151,7 +157,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide: const BorderSide(color: Color(0xFF00FF88)),
+                              borderSide: const BorderSide(
+                                color: Color(0xFF00FF88),
+                              ),
                             ),
                           ),
                           validator: (value) {
@@ -168,7 +176,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           decoration: InputDecoration(
                             labelText: 'Email',
                             labelStyle: const TextStyle(color: Colors.grey),
-                            prefixIcon: const Icon(Icons.email, color: Colors.grey),
+                            prefixIcon: const Icon(
+                              Icons.email,
+                              color: Colors.grey,
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: const BorderSide(color: Colors.grey),
@@ -179,7 +190,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide: const BorderSide(color: Color(0xFF00FF88)),
+                              borderSide: const BorderSide(
+                                color: Color(0xFF00FF88),
+                              ),
                             ),
                           ),
                           keyboardType: TextInputType.emailAddress,
@@ -200,7 +213,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           decoration: InputDecoration(
                             labelText: 'Phone Number',
                             labelStyle: const TextStyle(color: Colors.grey),
-                            prefixIcon: const Icon(Icons.phone, color: Colors.grey),
+                            prefixIcon: const Icon(
+                              Icons.phone,
+                              color: Colors.grey,
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: const BorderSide(color: Colors.grey),
@@ -211,7 +227,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide: const BorderSide(color: Color(0xFF00FF88)),
+                              borderSide: const BorderSide(
+                                color: Color(0xFF00FF88),
+                              ),
                             ),
                           ),
                           keyboardType: TextInputType.phone,
@@ -229,7 +247,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           decoration: InputDecoration(
                             labelText: 'Address',
                             labelStyle: const TextStyle(color: Colors.grey),
-                            prefixIcon: const Icon(Icons.home, color: Colors.grey),
+                            prefixIcon: const Icon(
+                              Icons.home,
+                              color: Colors.grey,
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: const BorderSide(color: Colors.grey),
@@ -240,7 +261,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide: const BorderSide(color: Color(0xFF00FF88)),
+                              borderSide: const BorderSide(
+                                color: Color(0xFF00FF88),
+                              ),
                             ),
                           ),
                           maxLines: 2,
@@ -260,19 +283,30 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 style: const TextStyle(color: Colors.white),
                                 decoration: InputDecoration(
                                   labelText: 'City',
-                                  labelStyle: const TextStyle(color: Colors.grey),
-                                  prefixIcon: const Icon(Icons.location_city, color: Colors.grey),
+                                  labelStyle: const TextStyle(
+                                    color: Colors.grey,
+                                  ),
+                                  prefixIcon: const Icon(
+                                    Icons.location_city,
+                                    color: Colors.grey,
+                                  ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
-                                    borderSide: const BorderSide(color: Colors.grey),
+                                    borderSide: const BorderSide(
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
-                                    borderSide: const BorderSide(color: Colors.grey),
+                                    borderSide: const BorderSide(
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
-                                    borderSide: const BorderSide(color: Color(0xFF00FF88)),
+                                    borderSide: const BorderSide(
+                                      color: Color(0xFF00FF88),
+                                    ),
                                   ),
                                 ),
                                 validator: (value) {
@@ -290,19 +324,30 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 style: const TextStyle(color: Colors.white),
                                 decoration: InputDecoration(
                                   labelText: 'ZIP Code',
-                                  labelStyle: const TextStyle(color: Colors.grey),
-                                  prefixIcon: const Icon(Icons.markunread_mailbox, color: Colors.grey),
+                                  labelStyle: const TextStyle(
+                                    color: Colors.grey,
+                                  ),
+                                  prefixIcon: const Icon(
+                                    Icons.markunread_mailbox,
+                                    color: Colors.grey,
+                                  ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
-                                    borderSide: const BorderSide(color: Colors.grey),
+                                    borderSide: const BorderSide(
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
-                                    borderSide: const BorderSide(color: Colors.grey),
+                                    borderSide: const BorderSide(
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
-                                    borderSide: const BorderSide(color: Color(0xFF00FF88)),
+                                    borderSide: const BorderSide(
+                                      color: Color(0xFF00FF88),
+                                    ),
                                   ),
                                 ),
                                 keyboardType: TextInputType.number,
@@ -335,7 +380,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     child: Column(
                       children: [
                         RadioListTile<String>(
-                          title: const Text('Credit Card', style: TextStyle(color: Colors.white)),
+                          title: const Text(
+                            'Credit Card',
+                            style: TextStyle(color: Colors.white),
+                          ),
                           value: 'Credit Card',
                           groupValue: _selectedPaymentMethod,
                           activeColor: const Color(0xFF00FF88),
@@ -346,7 +394,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           },
                         ),
                         RadioListTile<String>(
-                          title: const Text('Debit Card', style: TextStyle(color: Colors.white)),
+                          title: const Text(
+                            'Debit Card',
+                            style: TextStyle(color: Colors.white),
+                          ),
                           value: 'Debit Card',
                           groupValue: _selectedPaymentMethod,
                           activeColor: const Color(0xFF00FF88),
@@ -357,7 +408,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           },
                         ),
                         RadioListTile<String>(
-                          title: const Text('Cash on Delivery', style: TextStyle(color: Colors.white)),
+                          title: const Text(
+                            'Cash on Delivery',
+                            style: TextStyle(color: Colors.white),
+                          ),
                           value: 'Cash on Delivery',
                           groupValue: _selectedPaymentMethod,
                           activeColor: const Color(0xFF00FF88),
@@ -368,7 +422,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           },
                         ),
                         RadioListTile<String>(
-                          title: const Text('PayPal', style: TextStyle(color: Colors.white)),
+                          title: const Text(
+                            'PayPal',
+                            style: TextStyle(color: Colors.white),
+                          ),
                           value: 'PayPal',
                           groupValue: _selectedPaymentMethod,
                           activeColor: const Color(0xFF00FF88),
@@ -388,7 +445,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: _isProcessing ? null : () => _handleCheckout(context, cartViewModel),
+                    onPressed: _isProcessing
+                        ? null
+                        : () => _handleCheckout(context, cartViewModel),
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       backgroundColor: const Color(0xFF00FF88),
@@ -403,12 +462,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             width: 20,
                             child: CircularProgressIndicator(
                               strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.white,
+                              ),
                             ),
                           )
                         : const Text(
                             'Place Order',
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                   ),
                 ),
@@ -471,7 +535,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     );
   }
 
-  Future<void> _handleCheckout(BuildContext context, CartViewModel cartViewModel) async {
+  Future<void> _handleCheckout(
+    BuildContext context,
+    CartViewModel cartViewModel,
+  ) async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
@@ -514,7 +581,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             const SizedBox(height: 16),
             Text(
               'Order Total: \$${cartViewModel.totalPrice.toStringAsFixed(2)}',
-              style: const TextStyle(color: Color(0xFF00FF88), fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                color: Color(0xFF00FF88),
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 8),
             Text(
@@ -542,14 +612,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     if (shouldPop == true && context.mounted) {
       // Clear cart
       await cartViewModel.clearCart();
-      
+
       // Navigate back to product listing
       Navigator.of(context).popUntil((route) => route.isFirst);
-      
+
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Order placed successfully!'),
+            content: Text(
+              'Order placed successfully!',
+              style: TextStyle(color: Colors.white),
+            ),
             backgroundColor: Color(0xFF1A1A1A),
           ),
         );
@@ -557,4 +630,3 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     }
   }
 }
-

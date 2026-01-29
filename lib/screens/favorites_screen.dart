@@ -17,10 +17,7 @@ class FavoritesScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,
-        title: const Text(
-          'Favorites',
-          style: TextStyle(color: Colors.white),
-        ),
+        title: const Text('Favorites', style: TextStyle(color: Colors.white)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
@@ -31,9 +28,7 @@ class FavoritesScreen extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const CartScreen(),
-                ),
+                MaterialPageRoute(builder: (context) => const CartScreen()),
               );
             },
           ),
@@ -43,9 +38,7 @@ class FavoritesScreen extends StatelessWidget {
         builder: (context, viewModel, child) {
           if (viewModel.isLoading) {
             return const Center(
-              child: CircularProgressIndicator(
-                color: Color(0xFF00FF88),
-              ),
+              child: CircularProgressIndicator(color: Color(0xFF00FF88)),
             );
           }
 
@@ -114,11 +107,17 @@ class FavoritesScreen extends StatelessWidget {
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context, false),
-                            child: const Text('Cancel', style: TextStyle(color: Colors.grey)),
+                            child: const Text(
+                              'Cancel',
+                              style: TextStyle(color: Colors.grey),
+                            ),
                           ),
                           TextButton(
                             onPressed: () => Navigator.pop(context, true),
-                            child: const Text('Remove', style: TextStyle(color: Color(0xFF00FF88))),
+                            child: const Text(
+                              'Remove',
+                              style: TextStyle(color: Color(0xFF00FF88)),
+                            ),
                           ),
                         ],
                       ),
@@ -129,7 +128,11 @@ class FavoritesScreen extends StatelessWidget {
                       if (context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Removed from favorites'),
+                            content: Text(
+                              'Removed from favorites',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            backgroundColor: Color(0xFF1A1A1A),
                           ),
                         );
                       }
@@ -149,10 +152,7 @@ class _FavoriteCard extends StatelessWidget {
   final Product product;
   final VoidCallback onRemove;
 
-  const _FavoriteCard({
-    required this.product,
-    required this.onRemove,
-  });
+  const _FavoriteCard({required this.product, required this.onRemove});
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +168,8 @@ class _FavoriteCard extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => ChangeNotifierProvider(
-                create: (_) => ProductDetailViewModel()..loadProduct(product.id),
+                create: (_) =>
+                    ProductDetailViewModel()..loadProduct(product.id),
                 child: const ProductDetailScreen(),
               ),
             ),
@@ -231,20 +232,14 @@ class _FavoriteCard extends StatelessWidget {
                     // Category
                     Text(
                       product.category.name,
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
+                      style: const TextStyle(color: Colors.grey, fontSize: 12),
                     ),
                   ],
                 ),
               ),
               // Favorite Icon
               IconButton(
-                icon: const Icon(
-                  Icons.favorite,
-                  color: Color(0xFF00FF88),
-                ),
+                icon: const Icon(Icons.favorite, color: Color(0xFF00FF88)),
                 onPressed: onRemove,
               ),
             ],
@@ -254,4 +249,3 @@ class _FavoriteCard extends StatelessWidget {
     );
   }
 }
-

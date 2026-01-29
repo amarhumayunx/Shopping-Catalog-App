@@ -37,7 +37,10 @@ class CartScreen extends StatelessWidget {
                     context: context,
                     builder: (context) => AlertDialog(
                       backgroundColor: const Color(0xFF1A1A1A),
-                      title: const Text('Clear Cart', style: TextStyle(color: Colors.white)),
+                      title: const Text(
+                        'Clear Cart',
+                        style: TextStyle(color: Colors.white),
+                      ),
                       content: const Text(
                         'Are you sure you want to clear all items from cart?',
                         style: TextStyle(color: Colors.grey),
@@ -45,11 +48,17 @@ class CartScreen extends StatelessWidget {
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context, false),
-                          child: const Text('Cancel', style: TextStyle(color: Colors.grey)),
+                          child: const Text(
+                            'Cancel',
+                            style: TextStyle(color: Colors.grey),
+                          ),
                         ),
                         TextButton(
                           onPressed: () => Navigator.pop(context, true),
-                          child: const Text('Clear', style: TextStyle(color: Color(0xFF00FF88))),
+                          child: const Text(
+                            'Clear',
+                            style: TextStyle(color: Color(0xFF00FF88)),
+                          ),
                         ),
                       ],
                     ),
@@ -60,7 +69,11 @@ class CartScreen extends StatelessWidget {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Cart cleared'),
+                          content: Text(
+                            'Cart cleared',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: Color(0xFF1A1A1A),
                         ),
                       );
                     }
@@ -75,9 +88,7 @@ class CartScreen extends StatelessWidget {
         builder: (context, viewModel, child) {
           if (viewModel.isLoading) {
             return const Center(
-              child: CircularProgressIndicator(
-                color: Color(0xFF00FF88),
-              ),
+              child: CircularProgressIndicator(color: Color(0xFF00FF88)),
             );
           }
 
@@ -109,7 +120,11 @@ class CartScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.shopping_cart_outlined, size: 64, color: Colors.grey),
+                  Icon(
+                    Icons.shopping_cart_outlined,
+                    size: 64,
+                    color: Colors.grey,
+                  ),
                   SizedBox(height: 16),
                   Text(
                     'Your cart is empty',
@@ -131,14 +146,20 @@ class CartScreen extends StatelessWidget {
                     return _CartItemCard(
                       item: item,
                       onQuantityChanged: (quantity) async {
-                        await viewModel.updateQuantity(item.product.id, quantity);
+                        await viewModel.updateQuantity(
+                          item.product.id,
+                          quantity,
+                        );
                       },
                       onRemove: () async {
                         final confirm = await showDialog<bool>(
                           context: context,
                           builder: (context) => AlertDialog(
                             backgroundColor: const Color(0xFF1A1A1A),
-                            title: const Text('Remove Item', style: TextStyle(color: Colors.white)),
+                            title: const Text(
+                              'Remove Item',
+                              style: TextStyle(color: Colors.white),
+                            ),
                             content: const Text(
                               'Are you sure you want to remove this item from cart?',
                               style: TextStyle(color: Colors.grey),
@@ -146,11 +167,17 @@ class CartScreen extends StatelessWidget {
                             actions: [
                               TextButton(
                                 onPressed: () => Navigator.pop(context, false),
-                                child: const Text('Cancel', style: TextStyle(color: Colors.grey)),
+                                child: const Text(
+                                  'Cancel',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
                               ),
                               TextButton(
                                 onPressed: () => Navigator.pop(context, true),
-                                child: const Text('Remove', style: TextStyle(color: Color(0xFF00FF88))),
+                                child: const Text(
+                                  'Remove',
+                                  style: TextStyle(color: Color(0xFF00FF88)),
+                                ),
                               ),
                             ],
                           ),
@@ -161,7 +188,11 @@ class CartScreen extends StatelessWidget {
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text('Item removed from cart'),
+                                content: Text(
+                                  'Item removed from cart',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                backgroundColor: Color(0xFF1A1A1A),
                               ),
                             );
                           }
@@ -209,7 +240,7 @@ class CartScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     SizedBox(
                       width: double.infinity,
-                        child: ElevatedButton(
+                      child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -271,7 +302,8 @@ class _CartItemCard extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => ChangeNotifierProvider(
-                create: (_) => ProductDetailViewModel()..loadProduct(item.product.id),
+                create: (_) =>
+                    ProductDetailViewModel()..loadProduct(item.product.id),
                 child: const ProductDetailScreen(),
               ),
             ),
@@ -373,4 +405,3 @@ class _CartItemCard extends StatelessWidget {
     );
   }
 }
-
